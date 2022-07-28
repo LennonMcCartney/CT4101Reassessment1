@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ColliderM : MonoBehaviour {
-
-    public Vec3 position;
+    
+    public Vec3 pos;
     public Vec3 scale;
     public Vec3 dimensions;
 
-    void Start() {
-        position = new Vec3( transform.position );
+    public bool collided;
+    public ColliderM other;
+
+    void Awake() {
+        pos = new Vec3( transform.position );
         scale = new Vec3 ( transform.localScale );
         dimensions = scale / 2;
     }
 
-    void FixedUpdate() {
+    public void SetPos( Vec3 aPos ) {
+        pos = aPos;
+    }
+
+    public void Collided( bool aCollided, ColliderM aOther ) {
+        collided = aCollided;
+
+        if ( collided ) {
+            if ( aOther.gameObject.tag != "Floor" ) {
+                Debug.Log("Collision with not floor");
+                other = aOther;
+            }
+        } else {
+            other = null;
+        }
     }
 }
