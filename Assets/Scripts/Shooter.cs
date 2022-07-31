@@ -3,73 +3,103 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour {
-    FireProjectile fireProjectile;
+public class Shooter : MonoBehaviour
+{
+	public FireProjectile fireProjectile;
 
-    Vec3 pos;
-    Vec3 eulerAngles;
+	public Trap target;
 
-    GameObject target;
+	Vec3 pos;
+	Vec3 eulerAngles;
 
-    public List<Projectile> projectiles;
+	public List<Projectile> projectiles;
 
-    int counter;
-    int threshold;
+	//public bool fire;
 
-    void Start() {
-        counter = 0;
-        threshold = 50;
+	int closestDistIndex;
+	float closestDistSqrd;
+	float fireY;
 
-        pos = new Vec3(transform.position);
-        eulerAngles = new Vec3(transform.eulerAngles);
-        fireProjectile = GetComponent<FireProjectile>();
-    }
+	int counter;
+	int threshold;
 
-    void FixedUpdate() {
-        pos = new Vec3(transform.position);
-        eulerAngles = new Vec3(transform.eulerAngles);
+	void Awake() {
+		counter = 0;
+		threshold = 20;
 
-        projectiles = new List<Projectile>();
-        List<GameObject> projObjs = GameObject.FindGameObjectsWithTag("TrapProj").ToList();
+		//fire = false;
 
-        for ( int i = 0; i < projObjs.Count; i++ ) {
-            projectiles.Add(projObjs[i].GetComponent<Projectile>());
-        }
+		pos = new Vec3(transform.position);
+		eulerAngles = new Vec3(transform.eulerAngles);
+		fireProjectile = GetComponent<FireProjectile>();
+	}
 
-        if ( projectiles.Count > 0 ) {
-            int closestDistIndex = 0;
-            float closestDistSqrd = 9999999;
-            for ( int i = 0; i < projectiles.Count; i++ ) {
-                if ( !projectiles[i].colliderM.collided ) {
-                    float newDistSqrd = Vec3.DistanceSqrd( pos, projectiles[i].colliderM.pos );
-                    if ( newDistSqrd < closestDistSqrd ) {
-                        closestDistIndex = i;
-                        closestDistSqrd = newDistSqrd;
-                    }
-                }
-            }
-            Vec3 targetDisplacement = pos - projectiles[closestDistIndex].colliderM.pos;
-            float radiansY = 1.5f * Mathf.PI - Mathf.Atan2( targetDisplacement.z, targetDisplacement.x );
-            float otherY = 0.5f * Mathf.PI + Mathf.Atan2( targetDisplacement.z, targetDisplacement.x );;
-            float degreesY = radiansY * Mathf.Rad2Deg;
-            SetRotation( 0, degreesY, 0 );
+	void FixedUpdate() {
+		//Debug.Log(fire);
 
-            counter++;
-            if ( counter > threshold ) {
-                //Vec3 forwardVec = new Vec3( 0, 10, 45 );
-                float targetDistance = Vec3.DistanceXZ( pos, projectiles[closestDistIndex].colliderM.pos );
-                Vec3 forwardVec = new Vec3( 0, targetDisplacement.y / 0.7f, Mathf.Abs(targetDisplacement.z) / 0.7f );
-                Vec3 testVec = new Vec3( forwardVec.x * Mathf.Cos(otherY) - forwardVec.z * Mathf.Sin(otherY), forwardVec.y, forwardVec.x * Mathf.Sin(otherY) + forwardVec.z * Mathf.Cos(otherY) );
-                //testVec.Log();
-                counter = 0;
-                fireProjectile.Fire( testVec );
-            }
-        }
+		//counter = target.counter;
+		//threshold = target.threshold;
 
-        transform.eulerAngles = eulerAngles.Unity();
-    }
+		pos = new Vec3(transform.position);
+		eulerAngles = new Vec3(transform.eulerAngles);
 
-    void SetRotation( float aX, float aY, float aZ ) {
-        eulerAngles = new Vec3( aX, aY, aZ );
-    }
+		projectiles = new List<Projectile>();
+		List<GameObject> projObjs = GameObject.FindGameObjectsWithTag("TrapProj").ToList();
+
+		for (int i = 0; i < projObjs.Count; i++) {
+			if ( !projObjs[i].GetComponent<ColliderM>().collided ) {
+				projectiles.Add(projObjs[i].GetComponent<Projectile>());
+			}
+		}
+
+		if (projectiles.Count > 0) {
+			closestDistIndex = 0;
+			closestDistSqrd = 9999999;
+			for (int i = 0; i < projectiles.Count; i++) {
+				if (!projectiles[i].colliderM.collided) {
+					float newDistSqrd = Vec3.DistanceSqrd(pos, projectiles[i].colliderM.pos);
+					if (newDistSqrd < closestDistSqrd) {
+						closestDistIndex = i;
+						closestDistSqrd = newDistSqrd;
+					}
+				}
+			}
+			Vec3 targetDisplacement = pos - projectiles[closestDistIndex].colliderM.pos;
+			float radiansY = 1.5f * Mathf.PI - Mathf.Atan2(targetDisplacement.z, targetDisplacement.x);
+			fireY = 0.5f * Mathf.PI + Mathf.Atan2(targetDisplacement.z, targetDisplacement.x) - ( 0.01f * projectiles[closestDistIndex].velocity.x ) ;
+			float degreesY = radiansY * Mathf.Rad2Deg;
+			SetRotation(0, degreesY, 0);
+
+			counter++;
+			
+			if (counter > threshold) {
+				counter = 0;
+				Fire();
+			}
+		}
+
+		transform.eulerAngles = eulerAngles.Unity();
+	}
+
+	void SetRotation(float aX, float aY, float aZ) {
+		eulerAngles = new Vec3(aX, aY, aZ);
+	}
+
+	public void Fire() {
+		//float targetDistX = Vec3.DistanceXZ(pos, projectiles[closestDistIndex].colliderM.pos);
+		//float targetDistY = Vec3.DistanceYZ(pos, projectiles[closestDistIndex].colliderM.pos);
+
+		Vec3 testVec = projectiles[closestDistIndex].colliderM.pos - pos;
+		Vec3 forwardVec = new Vec3( 0, 2.7f * testVec.y + 0.01f * projectiles[closestDistIndex].velocity.y, Mathf.Abs(testVec.z) * 7.5f );
+		Vec3 forwardRotated = new Vec3(forwardVec.x * Mathf.Cos(fireY) - forwardVec.z * Mathf.Sin(fireY), forwardVec.y, forwardVec.x * Mathf.Sin(fireY) + forwardVec.z * Mathf.Cos(fireY));
+
+		//Debug.Log(projectiles[closestDistIndex].velocity.y);
+
+		Debug.Log(testVec.y);
+
+		//Vec3 forwardVec = new Vec3(0, targetDistY / 2.0f, Mathf.Abs(targetDistX) * 3.0f);
+		//Vec3 forwardRotated = new Vec3(forwardVec.x * Mathf.Cos(fireY) - forwardVec.z * Mathf.Sin(fireY), forwardVec.y, forwardVec.x * Mathf.Sin(fireY) + forwardVec.z * Mathf.Cos(fireY));
+		//counter = 0;
+		fireProjectile.Fire(forwardRotated);
+	}
 }

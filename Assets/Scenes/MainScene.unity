@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &315361111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2032852181781654810, guid: 8231f734ca62d101f8ccc00b89b8cdbd, type: 3}
+  m_PrefabInstance: {fileID: 1696421852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c469091d917d16adbc55d51555608f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &645966551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,13 +141,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1829528760423963847, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 315361111}
     - target: {fileID: 6249238514927907178, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
       propertyPath: m_Name
       value: Shooter
       objectReference: {fileID: 0}
     - target: {fileID: 6249238514927907178, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6249238514927907182, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
       propertyPath: m_RootOrder
@@ -144,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6249238514927907182, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6249238514927907182, guid: e2cf67d8f5b320c4b9102e6f6007b03b, type: 3}
       propertyPath: m_LocalPosition.y

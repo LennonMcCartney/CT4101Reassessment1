@@ -96,6 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787fb43c9b3712b419d73ce3bcfdfbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireProjectile: {fileID: 1292560772074887349}
+  target: {fileID: 2032852181781654810, guid: 8231f734ca62d101f8ccc00b89b8cdbd, type: 3}
+  projectiles: []
+  fire: 0
 --- !u!114 &1292560772074887349
 MonoBehaviour:
   m_ObjectHideFlags: 0

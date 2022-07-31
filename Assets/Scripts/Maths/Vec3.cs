@@ -41,7 +41,13 @@ public class Vec3 {
         return distance;
     }
 
-    public static Vec3 operator +( Vec3 a, Vec3 b )
+	// Distance in XZ plane ignoring Y
+	public static float DistanceYZ(Vec3 a, Vec3 b) {
+		float distance = Mathf.Sqrt((a.y - b.y) * (a.y - b.y) + (a.z - b.z) * (a.z - b.z));
+		return distance;
+	}
+
+	public static Vec3 operator +( Vec3 a, Vec3 b )
     => new Vec3( a.x + b.x, a.y + b.y, a.z + b.z );
 
     public static Vec3 operator -( Vec3 a, Vec3 b )
