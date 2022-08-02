@@ -66,7 +66,7 @@ public class Shooter : MonoBehaviour
 			}
 			Vec3 targetDisplacement = pos - projectiles[closestDistIndex].colliderM.pos;
 			float radiansY = 1.5f * Mathf.PI - Mathf.Atan2(targetDisplacement.z, targetDisplacement.x);
-			fireY = 0.5f * Mathf.PI + Mathf.Atan2(targetDisplacement.z, targetDisplacement.x) - ( 0.01f * projectiles[closestDistIndex].velocity.x ) ;
+			fireY = 0.5f * Mathf.PI + Mathf.Atan2(targetDisplacement.z, targetDisplacement.x) - ( 0.028f * projectiles[closestDistIndex].velocity.x ) ;
 			float degreesY = radiansY * Mathf.Rad2Deg;
 			SetRotation(0, degreesY, 0);
 
@@ -86,11 +86,11 @@ public class Shooter : MonoBehaviour
 	}
 
 	public void Fire() {
-		//float targetDistX = Vec3.DistanceXZ(pos, projectiles[closestDistIndex].colliderM.pos);
+		float targetDistXZ = Vec3.DistanceXZ(pos, projectiles[closestDistIndex].colliderM.pos);
 		//float targetDistY = Vec3.DistanceYZ(pos, projectiles[closestDistIndex].colliderM.pos);
 
 		Vec3 testVec = projectiles[closestDistIndex].colliderM.pos - pos;
-		Vec3 forwardVec = new Vec3( 0, 2.7f * testVec.y + 0.01f * projectiles[closestDistIndex].velocity.y, Mathf.Abs(testVec.z) * 7.5f );
+		Vec3 forwardVec = new Vec3( 0, 2.8f * testVec.y + 0.9f * projectiles[closestDistIndex].velocity.y, targetDistXZ * 2.7f );
 		Vec3 forwardRotated = new Vec3(forwardVec.x * Mathf.Cos(fireY) - forwardVec.z * Mathf.Sin(fireY), forwardVec.y, forwardVec.x * Mathf.Sin(fireY) + forwardVec.z * Mathf.Cos(fireY));
 
 		//Debug.Log(projectiles[closestDistIndex].velocity.y);
