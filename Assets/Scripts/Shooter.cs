@@ -90,12 +90,10 @@ public class Shooter : MonoBehaviour
 		//float targetDistY = Vec3.DistanceYZ(pos, projectiles[closestDistIndex].colliderM.pos);
 
 		Vec3 testVec = projectiles[closestDistIndex].colliderM.pos - pos;
-		Vec3 forwardVec = new Vec3( 0, 2.8f * testVec.y + 0.9f * projectiles[closestDistIndex].velocity.y, targetDistXZ * 2.7f );
+		Vec3 forwardVec = new Vec3( 0, 2.8f * testVec.y + 0.9f * projectiles[closestDistIndex].velocity.y, targetDistXZ * 2.9f );
 		Vec3 forwardRotated = new Vec3(forwardVec.x * Mathf.Cos(fireY) - forwardVec.z * Mathf.Sin(fireY), forwardVec.y, forwardVec.x * Mathf.Sin(fireY) + forwardVec.z * Mathf.Cos(fireY));
 
 		//Debug.Log(projectiles[closestDistIndex].velocity.y);
-
-		Debug.Log(testVec.y);
 
 		//Vec3 forwardVec = new Vec3(0, targetDistY / 2.0f, Mathf.Abs(targetDistX) * 3.0f);
 		//Vec3 forwardRotated = new Vec3(forwardVec.x * Mathf.Cos(fireY) - forwardVec.z * Mathf.Sin(fireY), forwardVec.y, forwardVec.x * Mathf.Sin(fireY) + forwardVec.z * Mathf.Cos(fireY));

@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
 	}
 
 	void FixedUpdate() {
-		colliderM.pos = new Vec3(transform.position);
+		colliderM.pos = new Vec3( transform.position );
 
 		if ( colliderM.collided ) {
 			velocity = new Vec3();
