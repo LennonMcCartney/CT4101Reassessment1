@@ -31,6 +31,8 @@ public class Shooter : MonoBehaviour
 		pos = new Vec3(transform.position);
 		eulerAngles = new Vec3(transform.eulerAngles);
 		fireProjectile = GetComponent<FireProjectile>();
+
+		RandNum.SetSeed( System.DateTime.Now.Millisecond );
 	}
 
 	void FixedUpdate() {
