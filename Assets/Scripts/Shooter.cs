@@ -28,8 +28,8 @@ public class Shooter : MonoBehaviour
 		// Set index to -1 to indicate it has not been assigned yet
 		closestDistIndex = -1;
 
-		pos = new Vec3(transform.position);
-		eulerAngles = new Vec3(transform.eulerAngles);
+		pos = new Vec3( transform.position );
+		eulerAngles = new Vec3( transform.eulerAngles );
 		fireProjectile = GetComponent<FireProjectile>();
 
 		RandNum.SetSeed( System.DateTime.Now.Millisecond );
