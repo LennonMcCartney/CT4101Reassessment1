@@ -14,8 +14,6 @@ public class Shooter : MonoBehaviour
 
 	public List<Projectile> projectiles;
 
-	//public bool fire;
-
 	public int closestDistIndex;
 	float closestDistSqrd;
 	float fireY;
@@ -36,10 +34,6 @@ public class Shooter : MonoBehaviour
 	}
 
 	void FixedUpdate() {
-		//Debug.Log(fire);
-
-		//counter = target.counter;
-		//threshold = target.threshold;
 
 		closestDistIndex = -1;
 

@@ -44,8 +44,6 @@ public class Projectile : MonoBehaviour
 				}
 			}
 
-			//Debug.Log( "tag >> " + colliderM.other.gameObject.tag );
-
 			if ( colliderM.pos.y < ( colliderM.dimensions.y - 0.005f ) ) {
 				colliderM.pos.y = colliderM.dimensions.y - 0.005f;
 			}

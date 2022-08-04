@@ -16,20 +16,22 @@ public class Colliders : MonoBehaviour
 	void FixedUpdate() {
 		UpdateList();
 
+		// Loop through each collider
 		for (int i = 0; i < colliders.Count; i++) {
-			//Debug.Log("colliders.Count >> " + colliders.Count + ", i >> " + i);
-			//bool collided = false;
 			int otherIndex;
+			// Loop through each collider, comparing each collider to every other collider
 			for (int j = 0; j < colliders.Count; j++) {
-				//Debug.Log( "i >> " + i + ", j >> " + j );
+				// If comparing different colliders
 				if (i != j) {
+					// collided = result of Axis Aligned Bounding Box collision
 					bool collided = colliders[i].pos.x + colliders[i].dimensions.x > colliders[j].pos.x - colliders[j].dimensions.x && colliders[i].pos.x - colliders[i].dimensions.x < colliders[j].pos.x + colliders[j].dimensions.x
 								 && colliders[i].pos.y + colliders[i].dimensions.y > colliders[j].pos.y - colliders[j].dimensions.y && colliders[i].pos.y - colliders[i].dimensions.y < colliders[j].pos.y + colliders[j].dimensions.y
 								 && colliders[i].pos.z + colliders[i].dimensions.z > colliders[j].pos.z - colliders[j].dimensions.z && colliders[i].pos.z - colliders[i].dimensions.z < colliders[j].pos.z + colliders[j].dimensions.z;
+					// Collide colliders[i] with colliders[j], if collided is false colliders[i].collided will be set to false
 					colliders[i].Collided( collided, colliders[j] );
 
 					if ( collided ) {
-						if ( ( colliders[i].gameObject.tag == "ShooterProj" && colliders[j].gameObject.tag == "TrapProj") || ( colliders[j].gameObject.tag == "TrapProj" && colliders[i].gameObject.tag == "ShooterProj" ) ) {
+						if ( colliders[i].gameObject.tag == "ShooterProj" && colliders[j].gameObject.tag == "TrapProj" ) {
 							projectilesHit++;
 						}
 						otherIndex = j;
