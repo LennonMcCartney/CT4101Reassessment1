@@ -31,7 +31,6 @@ public class Colliders : MonoBehaviour
 					if ( collided ) {
 						if ( ( colliders[i].gameObject.tag == "ShooterProj" && colliders[j].gameObject.tag == "TrapProj") || ( colliders[j].gameObject.tag == "TrapProj" && colliders[i].gameObject.tag == "ShooterProj" ) ) {
 							projectilesHit++;
-							Debug.Log(projectilesHit);
 						}
 						otherIndex = j;
 						break;

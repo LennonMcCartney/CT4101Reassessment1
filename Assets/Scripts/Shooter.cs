@@ -16,7 +16,7 @@ public class Shooter : MonoBehaviour
 
 	//public bool fire;
 
-	int closestDistIndex;
+	public int closestDistIndex;
 	float closestDistSqrd;
 	float fireY;
 
@@ -27,7 +27,8 @@ public class Shooter : MonoBehaviour
 		counter = 0;
 		threshold = 20;
 
-		//fire = false;
+		// Set index to -1 to indicate it has not been assigned yet
+		closestDistIndex = -1;
 
 		pos = new Vec3(transform.position);
 		eulerAngles = new Vec3(transform.eulerAngles);
@@ -39,6 +40,8 @@ public class Shooter : MonoBehaviour
 
 		//counter = target.counter;
 		//threshold = target.threshold;
+
+		closestDistIndex = -1;
 
 		pos = new Vec3(transform.position);
 		eulerAngles = new Vec3(transform.eulerAngles);
@@ -53,7 +56,7 @@ public class Shooter : MonoBehaviour
 		}
 
 		if (projectiles.Count > 0) {
-			closestDistIndex = 0;
+			//closestDistIndex = -1;
 			closestDistSqrd = 9999999;
 			for (int i = 0; i < projectiles.Count; i++) {
 				if (!projectiles[i].colliderM.collided) {
