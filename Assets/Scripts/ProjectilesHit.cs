@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ProjectilesHit : MonoBehaviour
-{
+public class ProjectilesHit : MonoBehaviour {
 	TextMeshProUGUI myText;
 
 	public Colliders colliders;

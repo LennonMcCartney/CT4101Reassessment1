@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireProjectile : MonoBehaviour
-{
+public class FireProjectile : MonoBehaviour {
 	public GameObject projectilePrefab;
 	private GameObject projectileClone;
 

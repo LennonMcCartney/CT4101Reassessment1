@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TargetSpeed : MonoBehaviour
-{
+public class TargetSpeed : MonoBehaviour {
 	TextMeshProUGUI myText;
 
 	public Shooter shooter;

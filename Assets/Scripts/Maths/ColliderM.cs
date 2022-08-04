@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderM : MonoBehaviour
-{
+public class ColliderM : MonoBehaviour {
 	public Vec3 pos;
 	public Vec3 scale;
 	public Vec3 dimensions;

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
-{
+public class Shooter : MonoBehaviour {
 	public FireProjectile fireProjectile;
 
 	public Trap target;

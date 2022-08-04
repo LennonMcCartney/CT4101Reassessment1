@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
-{
+public class Trap : MonoBehaviour {
 	FireProjectile fireProjectile;
 
 	public int counter;
