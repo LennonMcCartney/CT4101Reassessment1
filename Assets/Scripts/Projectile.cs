@@ -29,14 +29,11 @@ public class Projectile : MonoBehaviour
 				switch (colliderM.other.gameObject.tag) {
 					case "TrapProj":
 						Destroy( colliderM.other.gameObject );
-						//Debug.Log("TrapProj");
 						break;
 					case "ShooterProj":
-						//Debug.Log("ShooterProj");
 						break;
 					case "Floor":
 						acceleration = new Vec3();
-						//Debug.Log("Floor");
 						break;
 					default:
 						Debug.Log("Other collider tag error");

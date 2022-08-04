@@ -18,7 +18,7 @@ public class Colliders : MonoBehaviour
 
 		// Loop through each collider
 		for (int i = 0; i < colliders.Count; i++) {
-			int otherIndex;
+			//int otherIndex;
 			// Loop through each collider, comparing each collider to every other collider
 			for (int j = 0; j < colliders.Count; j++) {
 				// If comparing different colliders
@@ -31,10 +31,11 @@ public class Colliders : MonoBehaviour
 					colliders[i].Collided( collided, colliders[j] );
 
 					if ( collided ) {
+						// If shooter projectile is colliding with trap projectile, incrememnt number of projectiles hit
 						if ( colliders[i].gameObject.tag == "ShooterProj" && colliders[j].gameObject.tag == "TrapProj" ) {
 							projectilesHit++;
 						}
-						otherIndex = j;
+						//otherIndex = j;
 						break;
 					}
 				}

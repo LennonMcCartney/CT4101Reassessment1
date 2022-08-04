@@ -4,12 +4,20 @@ using UnityEngine;
 
 public static class RandNum {
 
-    public static int RandInt( int seed, int min, int max ) {
-        int randInt = seed;
-        randInt += min;
-        randInt %= max;
+	static long seed;
 
-        return randInt;
-    }
+	// Values taken from Microsoft Visual C++ compiler
+	static int a = 214013;
+	static int c = 2531011;
+	static long m = 4294967296;
+
+	public static void SetSeed( int aSeed ) {
+		seed = aSeed;
+	}
+
+	public static long NextRand() {
+		seed = ( a * seed + c ) % m;
+		return seed;
+	}
 
 }
